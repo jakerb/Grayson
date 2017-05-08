@@ -1,0 +1,23 @@
+#!/usr/bin/php
+<?php
+
+	/*
+	 * @name 	Grayson
+	 * @author 	Jake Bown <jakebown@gmail.com>
+	 * @version 1.0.0
+	 */
+
+	require 'Core/Console/Console.php';
+
+	use App\Console as console;
+
+	if (php_sapi_name() !== 'cli') {
+		die(console::Error('Grayson requires CLI to run.'));
+	}
+
+	array_shift($argv);
+
+	die(console\Console::Execute($argv));
+
+
+?>

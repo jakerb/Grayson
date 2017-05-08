@@ -1,0 +1,39 @@
+<?php
+
+	/*
+	 * View
+	 */
+
+	$app->get('/{{_route}}', function($request, $response, $args) {
+		return $this->get('app')->view->render('{{_route}}.twig');
+	});
+	
+
+	/*
+	 * RESTful Endpoints
+	 */
+	$app->group('/{{_route}}', function() {
+
+		$this->get('/get', function ($request, $response, $args) { 
+			$app = $this->get('app'); 
+			return $app->controller->{{_route}}->_invoke($app)->Get($request);  
+		})->setName('{{_route}}-get');
+
+		$this->post('/update', function ($request, $response, $args) { 
+			$app = $this->get('app'); 
+			return $app->controller->{{_route}}->_invoke($app)->Update($request);  
+		})->setName('{{_route}}-update');
+
+		$this->post('/put', function ($request, $response, $args) { 
+			$app = $this->get('app'); 
+			return $app->controller->{{_route}}->_invoke($app)->Put($request);  
+		})->setName('{{_route}}-put');
+
+		$this->post('/delete', function ($request, $response, $args) {  
+			$app = $this->get('app');
+			return $app->controller->{{_route}}->_invoke($app)->Delete($request);  
+		})->setName('{{_route}}-delete');
+
+	});
+
+?>
