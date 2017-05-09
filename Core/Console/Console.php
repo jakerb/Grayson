@@ -150,6 +150,15 @@
 		}
 
 		/*
+		 * @info Create Endpoint
+		 */
+		private static function __createEndpoint($name = String, $data = Array()) {
+			$name = ucfirst($name);
+			file_put_contents("Application/Route/$name.php", str_replace('/* End of Route */', self::Import($data, "endpoint.txt"), file_get_contents("Application/Route/$name.php")));
+			return self::Response("Created New Route in \"$name\".", $success = true, $die = false, $return = true);
+		}
+
+		/*
 		 * @info Create View
 		 */
 		private static function __createView($name = String) {
@@ -194,6 +203,38 @@
 
 			$args->methodName = $method = ucfirst($args->methodName);
 			$prompt = self::Prompt("You are about to create the table for $method which will delete any data already created, are you sure? (y/n)");
+		}
+
+
+		private function _RouteAdd($args = Array()) {
+			$args = self::mapArguments(array('name', 'method'), $args);
+			if(strlen($args->name) < 1 || strlen($args->method) < 1) {
+				echo self::Response("Cannot create Route without a name, method.", $success = false, $die = true, $return = false);
+			}
+
+			if(!strpos($args->name, ':') !== false) {
+				echo self::Response("Route syntax incorrect, (method:route)", $success = false, $die = true, $return = false);
+			}
+
+			$name = explode(':', $args->name);
+			if(count($name) !== 2) {
+				echo self::Response("Route synax incorrect, (method:route)", $success = false, $die = true, $return = false);
+			}
+
+			$method = ucfirst($name[0]);
+			$route = $name[1];
+
+			if(!file_exists("Application/Route/$method.php")) {
+				echo self::Response("Method $method does not exist.", $success = false, $die = true, $return = false);
+			}
+
+			echo self::__createEndpoint($method, array(
+				'method' => strtolower($args->method),
+				'_endpoint' => $route,
+				'endpoint' => ucfirst($route)
+			));
+
+			echo "\n";
 		}
 
 		/*

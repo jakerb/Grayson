@@ -8,8 +8,12 @@
 
 	class Migration {
 	
-		public function add() {
-			
+		public function add($table = String, $data = Array()) {
+			if(!isset($loader->migration)) {
+				$loader->migration = array();
+			}
+
+			$loader->migration[$table] = $data();
 		}
 	
 	}

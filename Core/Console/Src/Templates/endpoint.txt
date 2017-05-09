@@ -1,0 +1,5 @@
+$app->{{method}}('/{{_endpoint}}', function($request, $response, $args) {
+		//Do something.
+	});
+
+	/* End of Route */

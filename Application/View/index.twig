@@ -1,0 +1,29 @@
+{% extends 'Layouts/base.twig' %}
+{% block container %}
+	<style>
+		body {
+			background: #eee;
+		}
+	</style>
+	<div style="position: relative;">
+		<div style="text-align: center; font-family: 'Helvetica', Ariel, sans-serif; padding-top: 25px;">
+
+			<!-- Grayson Circle -->
+			<div class="greyson-logo" style="position: relative; border-radius: 100%; border: 10px solid #222; width: 100px; height: 100px; display: inline-block">
+				<!-- Grayson Line -->
+				<div style="width: 50px; height: 10px; background: #222; position: relative; top: 45px; left: 80px;"></div>
+				<!-- Grayson Line -->
+			</div>
+			<!-- Grayson Circle -->
+
+			<h1 style="font-weight: 100;">Grayson.</h1>
+			<h6 style="font-weight: 400;">Your application is running in <strong>{{ mode ? 'production' : 'development' }}</strong> mode, go get hacking!</h6>
+			<h6>Version {{grayson.version}} &bullet; <a style="color: inherit;" href="https://github.com/jakerb/Grayson">Github</a> &bullet; <a href="https://github.com/jakerb/Grayson/wiki" style="color: inherit;">Documentation</a></h6>
+	
+			<div style="width: 25%; height: 2px; background: #CCC; margin: 0 auto;"></div>
+
+
+		</div>
+	</div>
+
+{% endblock %}

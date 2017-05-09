@@ -13,6 +13,10 @@
 	//Set Config
 	$loader->config->add(array(
 		'app' => $loader,
+		'production_mode' => false,
+		'grayson' => [
+			'version' => '1.0.2'
+		],
 		'settings' => [
 	        'displayErrorDetails' => true
 	    ]

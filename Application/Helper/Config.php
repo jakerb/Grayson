@@ -20,7 +20,6 @@
 			} else {
 				$this->config = $parameters;
 			}
-			
 		}
 
 	}
