@@ -1,0 +1,14 @@
+{
+	"label": "text",
+	"name": "Text",
+	"fields": [
+		{
+			"label": "Hero Content",
+			"name": "body",
+			"type": "text",
+			"minlength": 1,
+			"maxlength": 500,
+			"required": true
+		}
+	]
+}

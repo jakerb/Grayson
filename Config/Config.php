@@ -9,6 +9,8 @@
 	//Set Twig
 	$loader->view = new Twig_Environment(new Twig_Loader_Filesystem('Application/View/'));
 
+	//Set Admin Twig
+	$loader->admin = new Twig_Environment(new Twig_Loader_Filesystem('Plugins/Admin/'));
 
 	//Set Config
 	$loader->config->add(array(

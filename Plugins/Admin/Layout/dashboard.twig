@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Grayson Admin</title>
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="Plugins/Admin/Theme/css/bootstrap.min.css">
+	<link rel="stylesheet" href="Plugins/Admin/Theme/css/stylesheet.css">
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:300,400,600">
+	<link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<!-- Javascript -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
+	<script src="Plugins/Admin/Theme/js/angular.filter.js"></script>
+	<script src="Plugins/Admin/Theme/js/admin.js"></script>
+</head>
+<body ng-app="plugin" ng-controller="admin" class="nojs" ng-class="isFullScreen ? 'full-screen' : ''">
+	
+	<div class="alert alert-danger alert-dismissible page-alert hidden" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <strong>Warning!</strong> Grayson admin will not work without Javascript enabled.
+	</div>
+
+	<div ng-class="isFullScreen ? 'col-md-12' : 'container'">
+		<div class="admin-ui">
+			<div class="row row-eq-height">
+				<div class="col-md-3 sidebar-container">
+					<div class="sidebar">
+						<header>
+							<h4>Grayson <strong><small><sup>CMS</sup></small></strong> <a href="#" class="ion-arrow-expand pull-right" ng-click="isFullScreen = !isFullScreen"></a></h4>
+						</header>
+						<section>
+							<ul class="list-unstyled">
+								<li>
+									<a href="#" ng-click="listPages = !listPages" ><i ng-class="listPages ? 'ion-minus' : 'ion-plus'"></i> Pages</a>
+									<ul class="list-unstyled" ng-class="listPages ? '' : 'hidden'">
+										<li><a href="#"><i class="ion-plus"></i> Add Page</a></li>
+										<li><a ng-class="activeMenu == 'homepage' ? 'active' : ''" ng-click="isListView = !isListView; activeMenu = 'homepage'" href="#"><i class="ion-home"></i> Homepage</a></li>
+										<li><a href="#"><i class="ion-document"></i> About</a></li>
+										<li><a href="#"><i class="ion-document"></i> Contact</a></li>
+									</ul>
+								</li>
+								<li><a href="#" ng-click="listModules = !listModules"><i ng-class="listModules ? 'ion-minus' : 'ion-plus'"></i> Modules</a>
+										<ul class="list-unstyled" ng-class="listModules ? '' : 'hidden'">
+											{% for module in modules %}
+											<li><a href=""><i class="ion-waterdrop"></i> {{module}}</a></li>
+											{% endfor %}
+										</ul>
+								</li>
+								<li><a href="#" ng-click="listUsers = !listModules"><i ng-class="listUsers ? 'ion-minus' : 'ion-plus'"></i> Users</a>
+									<ul class="list-unstyled" ng-class="listUsers ? '' : 'hidden'">
+										<li><a href="#"><i class="ion-person"></i> Jake Bown</a></li>
+									</ul>
+								</li>
+							</ul>
+						</section>
+					</div>
+				</div>
+				<div ng-class="isListView ? '' : 'hidden'" class="col-md-3 sidebar-container list-container">
+					<div class="sidebar">
+						<div class="list-group">
+						<a class="list-group-item divider">
+						  	<h5 class="list-group-item-heading">Page Properties</h5>
+						  </a>
+						 <a href="#" class="list-group-item" ng-click="editPage = !editPage">
+						    <h5 class="list-group-item-heading"><strong>Page</strong> Properties <small class="pull-right">Published</small></h5>
+						    <p class="list-group-item-text">Configuration of this page.</p>
+						  </a>
+						  <a class="list-group-item divider">
+						  	<h5 class="list-group-item-heading">Modules</h5>
+						  </a>
+						  <a href="#" class="list-group-item">
+						    <h5 class="list-group-item-heading"><i class="ion-navicon-round"></i> <strong>Hero</strong> Module <small class="pull-right">Active</small></h5>
+						    <p class="list-group-item-text">This module contains <strong>4</strong> fields.</p>
+						  </a>
+						  <a href="#" class="list-group-item">
+						    <h5 class="list-group-item-heading"><i class="ion-navicon-round"></i> <strong>Text</strong> Module <small class="pull-right">Active</small></h5>
+						    <p class="list-group-item-text">This module contains <strong>1</strong> fields.</p>
+						  </a>
+						   <a href="#" class="list-group-item">
+						    <h5 class="list-group-item-heading"><i class="ion-navicon-round"></i> <strong>Text</strong> Module <small class="pull-right">Active</small></h5>
+						    <p class="list-group-item-text">This module contains <strong>1</strong> fields.</p>
+						  </a>
+						   <a href="#" class="list-group-item">
+						    <h5 class="list-group-item-heading"><i class="ion-navicon-round"></i> <strong>Text</strong> Module <small class="pull-right">Active</small></h5>
+						    <p class="list-group-item-text">This module contains <strong>1</strong> fields.</p>
+						  </a>
+						</div>
+						</section>
+					</div>
+				</div>
+				<div ng-class="isListView ? 'col-md-6' : 'col-md-9'" class="content-container">
+					<div class="content">
+						<header ng-class="isListView ? 'hidden' : ''">
+							<h4><i class="ion-search"></i> <input type="text" placeholder="Search posts.." class="form-control"></h4>
+						</header>
+						<header ng-class="isListView && editPage ? '' : 'hidden'">
+							<h4><input type="text" ng-model="page_title" placeholder="Page Title" class="page-name form-control"><span class="required">*</span></h4>
+						</header>
+						<section ng-class="editPage ? '' : 'hidden'">
+							<div class="alert alert-sm affix-alert alert-info hidden" role="alert">This is the <strong>homepage</strong>.</div>
+							<div class="row">
+								<div class="col-md-6">
+									<label>Page Path <span class="required">*</span></label>
+									<input type="text" ng-value="'/' + page_title | slugify" class="form-control" placeholder="/">
+								</div>
+								<div class="col-md-6">
+									<label>Page Parent <span class="required">*</span></label>
+									<select class="form-control">
+										<option value="">No Parent</option>
+									</select>
+								</div>
+								<div class="col-md-6">
+									<label>Page State <span class="required">*</span></label>
+									<select class="form-control">
+										<option value="">Published</option>
+									</select>
+								</div>
+								<div class="col-md-6">
+									<label>Page Layout <span class="required">*</span></label>
+									<select class="form-control">
+										<option value="">Base</option>
+									</select>
+								</div>
+								<div class="col-md-12">
+									<label>Front Matter</label>
+									<input type="text" class="form-control">
+									
+									<label>Classes</label>
+									<input type="text" class="form-control">
+
+									<label class="hidden">Hero Content <small class="pull-right">24/100</small></label>
+									<textarea rows="5" class="form-control hidden">This is the text that goes in the hero.</textarea>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-class="isFullScreen ? 'hidden' : ''">
+		<div class="col-md-12 text-center">
+			<footer>
+				<p><small>Made with <i class="ion-heart"></i> by <a href="http://jakebown.com">Jake</a></small></p>
+			</footer>
+		</div>
+	</div>
+</body>
+</html>
